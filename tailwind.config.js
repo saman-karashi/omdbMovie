@@ -16,8 +16,12 @@ module.exports = {
         yellow:'#ffe643',
         darkRed:'#f21729',
         black:'#272727',
-        darkSky:'#35b6ef'
+        darkSky:'#35b6ef',
+        "black-800":'#303030'
         },
+        spacing:{
+        '500':'31.25rem'
+        }
     },
   },
   plugins: [],
