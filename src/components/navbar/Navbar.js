@@ -1,8 +1,27 @@
-import {useState} from 'react';
+import {useState,useEffect} from 'react';
 import {Link} from 'react-router-dom';
+import {supabase} from '../../supabaseClient';
+import MobileNav from './MobileNav';
 
 const Navbar = () => {
-const [isOpen,setIsOpen]=useState(false)
+const [isOpen,setIsOpen]=useState(false);
+const [user,setUser]= useState(null);
+
+useEffect(()=>{
+setUser(supabase.auth.user());
+
+const unSubscribe =supabase.auth.onAuthStateChange((event,session)=>{
+if(event === 'SIGNED_IN'){
+setUser(session.user)
+}else if(event === 'SIGNED_OUT') {
+setUser(null)
+}
+})
+
+return ()=> unSubscribe.data.unsubscribe()
+
+},[])
+
 
   return (
     <div className='container py-5 px-2 mx-auto flex justify-between lg:block'>
@@ -13,6 +32,8 @@ const [isOpen,setIsOpen]=useState(false)
                   {/* Desktop nav */}
                  <nav className='hidden lg:block'>
                      <ul className='text-white flex'>
+                         {user ?
+                         <>
                          <li className='ml-4 duration-200 ease-ease-in-out hover:text-darkSky'>
                              <Link to='/'>Home</Link>
                          </li>
@@ -22,18 +43,32 @@ const [isOpen,setIsOpen]=useState(false)
                          <li className='ml-4 duration-200 ease-ease-in-out hover:text-darkSky'>
                              <Link to='/profile'>Profile</Link>
                          </li>
+                         </>
+                         :
+                         <>
+                           <li className='ml-4 duration-200 ease-ease-in-out hover:text-darkSky'>
+                             <Link to='/'>Home</Link>
+                            </li>
+                            <li className='ml-4 duration-200 ease-ease-in-out hover:text-darkSky'>
+                             <Link to='/sign-up'>Sign up</Link>
+                            </li>
+                         </>
+
+                         }
                      </ul>
                  </nav>
             </div>
-            <div className='hidden lg:flex lg:items-center'>
-               <h1 className='text-white mx-5'>Welcome Saman!</h1>
-               <div className='mx-5'>
-                 <img src={"/"} alt="avatar" className="w-16 h-16 rounded-full" /> 
-               </div> 
-               <div className='ml-5'>
-                <button className='px-5 py-2 rounded-full text-white bg-darkRed font-bold'>Log out</button>
-               </div>
-            </div>
+                {user &&
+                <div className='hidden lg:flex lg:items-center'>
+                <h1 className='text-white mx-5'>Welcome Saman!</h1>
+                <div className='mx-5'>
+                    <img src={"/"} alt="avatar" className="w-16 h-16 rounded-full" /> 
+                </div> 
+                <div className='ml-5'>
+                    <button className='px-5 py-2 rounded-full text-white bg-darkRed font-bold'>Log out</button>
+                </div>
+                </div>     
+                }
         </header>
 
         {/* Hamburger */}
@@ -42,35 +77,8 @@ const [isOpen,setIsOpen]=useState(false)
             <div className='bar'></div>
             <div className='bar'></div>
         </div>
-
-        {/* Mobile nav */}
-         <div className={`fixed w-80 h-screen bg-black right-0 top-16 transition-all duration-500 ${isOpen ? 'translate-x-0' : 'translate-x-full'} lg:hidden`}>
-           <div className='my-10 flex justify-center flex-col items-center'>
-               <div className='mx-5'>
-                 <img src={"/"} alt="avatar" className="w-16 h-16 rounded-full" /> 
-               </div> 
-                <h1 className='text-white mx-5'>Welcome Saman!</h1>
-           </div>
-           <div>
-            <nav>
-                <ul className='text-white text-center'>
-                    <li className='mt-4 duration-200 ease-ease-in-out hover:text-darkSky'>
-                        <Link to='/'>Home</Link>
-                    </li>
-                    <li className='mt-4 duration-200 ease-ease-in-out hover:text-darkSky'>
-                        <Link to='/watchlists'>Watchlists</Link>
-                    </li>
-                    <li className='mt-4 duration-200 ease-ease-in-out hover:text-darkSky'>
-                        <Link to='/profile'>Profile</Link>
-                    </li>
-                </ul>
-              </nav>
-              <div className='mt-5 text-center'>
-                <button className='px-5 py-2 rounded-full text-white bg-darkRed font-bold'>Log out</button>
-               </div>
-           </div>
-         </div>
-         
+    
+        <MobileNav user={user} isOpen={isOpen}/>
     </div>
   )
 }
