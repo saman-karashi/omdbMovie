@@ -1,8 +1,13 @@
-import React,{useState} from 'react';
-import {Link} from 'react-router-dom'
+import React,{useState,useContext} from 'react';
+import {Link} from 'react-router-dom';
+import { Context } from '../../context/authContext';
 
 const MobileNav = ({user}) => {
 const [isOpen,setIsOpen]=useState(false);
+const {
+logOut
+}=useContext(Context)
+
 
 return (
 <>
@@ -52,7 +57,7 @@ return (
         </nav>
         {user &&
         <div className='mt-5 text-center'>
-          <button className='px-5 py-2 rounded-full text-white bg-darkRed font-bold'>Log out</button>
+          <button onClick={logOut} className='px-5 py-2 rounded-full text-white bg-darkRed font-bold'>Log out</button>
           </div>
         }
       </div>

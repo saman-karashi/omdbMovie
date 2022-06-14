@@ -1,13 +1,12 @@
 import React from 'react';
 import Navbar from '../navbar/Navbar';
-import Home from '../home/Home'
 
-const Layout = () => {
+const Layout = ({children}) => {
   return (
     <>
      <Navbar />
-     <main>
-       <Home />
+     <main className='mt-16'>
+      {children}
      </main>
     </>
   )

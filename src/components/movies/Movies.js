@@ -1,8 +1,7 @@
-import {useEffect,useState} from 'react';
 import {Star,Plus} from '../../icons';
-import {supabase} from '../../supabaseClient';
 
 const Movies = ({poster_path,title,vote_average}) => {
+
 return (
     poster_path &&
     <article className='bg-black rounded overflow-hidden border border-2 border-black'>

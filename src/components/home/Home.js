@@ -1,9 +1,11 @@
-import {useState} from 'react';
+import {useState,useContext} from 'react';
 import {useSelector,useDispatch} from 'react-redux';
 import { Search } from '../../icons';
 import Movies from '../movies/Movies';
 import { fetchMoviesHandler } from '../../features/fetchMoviesSlice';
-import {BounceLoader} from 'react-spinners'
+import {BounceLoader} from 'react-spinners';
+import Layout from '../layout/Layout';
+
 
 const Home = () => {
 const [search,setSearch]=useState('')
@@ -14,6 +16,7 @@ loading,
 error
 } =useSelector(state => state.fetchMoviesReducer)
 
+
 const formSubmitHandler = (e)=>{
 e.preventDefault();
 
@@ -23,7 +26,8 @@ setSearch('')
 }
 
   return (
-    <section className='mt-16'>
+  <Layout>
+    <section>
         <div className="container mx-auto">
         <form onSubmit={formSubmitHandler} className='w-96 mx-auto' >
             <div className='relative'>
@@ -52,6 +56,7 @@ setSearch('')
       
         </div>
     </section>
+  </Layout>
   )
 }
 

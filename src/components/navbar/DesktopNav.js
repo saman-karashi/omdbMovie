@@ -1,8 +1,13 @@
-import React from 'react';
-import {Link} from 'react-router-dom'
+import {useContext} from 'react';
+import {Link} from 'react-router-dom';
+import { Context } from '../../context/authContext';
 
 const DesktopNav = ({user}) => {
-  return (     
+const {
+logOut
+}=useContext(Context)
+
+  return (          
     <header className='flex justify-between'>
     <div className='lg:flex lg:items-center'>
         <h1 className='text-white font-bold text-xl mr-5'>OMDB<span className='text-darkSky'>Movie</span></h1>
@@ -42,7 +47,7 @@ const DesktopNav = ({user}) => {
             <img src={"/"} alt="avatar" className="w-16 h-16 rounded-full" /> 
         </div> 
         <div className='ml-5'>
-            <button className='px-5 py-2 rounded-full text-white bg-darkRed font-bold'>Log out</button>
+            <button onClick={logOut} className='px-5 py-2 rounded-full text-white bg-darkRed font-bold'>Log out</button>
         </div>
         </div>     
         }
