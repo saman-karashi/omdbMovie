@@ -33,6 +33,13 @@ return rejectWithValue('Opps there seems something went wrong.')
 const fetchMoviesSlice = createSlice({
 name:'movies',
 initialState,
+reducers:{
+    resetStore:(state)=>{
+    state.error='';
+    state.loading=false;
+    state.movies=null;
+    }
+},
 extraReducers:{
     [fetchMoviesHandler.pending]:(state)=>{
     state.loading = true;
@@ -52,5 +59,7 @@ extraReducers:{
 }
 })
 
+
+export const {resetStore} = fetchMoviesSlice.actions;
 
 export const fetchMoviesReducer = fetchMoviesSlice.reducer;

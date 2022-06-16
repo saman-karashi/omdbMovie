@@ -2,12 +2,11 @@ import React,{useState,useContext} from 'react';
 import {Link} from 'react-router-dom';
 import { Context } from '../../context/authContext';
 
-const MobileNav = ({user}) => {
+const MobileNav = ({user,username,avatar_url}) => {
 const [isOpen,setIsOpen]=useState(false);
 const {
 logOut
 }=useContext(Context)
-
 
 return (
 <>
@@ -20,11 +19,11 @@ return (
 
   <div className={`fixed w-80 z-10 h-screen bg-neutral-900 right-0 top-16 transition-all duration-500 ${isOpen ? 'translate-x-0' : 'translate-x-full'} lg:hidden`}>
       {user &&
-      <div className='my-10 flex justify-center flex-col items-center'>
-          <div className='mx-5'>
-              <img src={"/"} alt="avatar" className="w-16 h-16 rounded-full" /> 
+      <div className='my-5 flex justify-center flex-col items-center'>
+          <div className='my-5'>
+              <img className={`w-16 h-16 rounded-full ${avatar_url ? "opacity-1" : "opacity-0"}`} src={avatar_url && `https://sbybrlsjodbbxrkdbsru.supabase.co/storage/v1/object/public/${avatar_url}`} /> 
           </div> 
-          <h1 className='text-white mx-5'>Welcome Saman!</h1>
+          <h1 className='text-white mx-5'>{`Welcome ${username}`}</h1>
       </div>
       }
       

@@ -1,7 +1,6 @@
 import {Star,Plus} from '../../icons';
 
 const Movies = ({poster_path,title,vote_average}) => {
-
 return (
     poster_path &&
     <article className='bg-black rounded overflow-hidden border border-2 border-black'>
@@ -17,7 +16,7 @@ return (
                </span>
             </span>
             <div>
-                <button className='flex text-darkSky bg-black-800 p-2 w-full justify-center font-bold items-center rounded my-3 transition-all duration-200 ease-ease-in-out hover:opacity-80'>
+                <button  className='flex text-darkSky bg-black-800 p-2 w-full justify-center font-bold items-center rounded my-3 transition-all duration-200 ease-ease-in-out hover:opacity-80'>
                     <Plus />
                 watchlist
                 </button>

@@ -1,11 +1,7 @@
-import React from 'react';
-import Navbar from '../navbar/Navbar';
-
 const Layout = ({children}) => {
-  return (
+return (
     <>
-     <Navbar />
-     <main className='mt-16'>
+     <main className='mt-16 p-4'>
       {children}
      </main>
     </>
