@@ -3,7 +3,7 @@ import {fetchMoviesReducer} from '../features/fetchMoviesSlice';
 
 const store = configureStore({
 reducer:{
-fetchMoviesReducer
+fetchMovies:fetchMoviesReducer
 },
 })
 

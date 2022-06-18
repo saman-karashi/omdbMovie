@@ -10,7 +10,7 @@ const [website,setWebsite]=useState('');
 const [username,setUsername]=useState('');
 const [isUploading,setIsUploading]=useState(false);
 const {
-fetchUserProfiles
+fetchUserProfile
 } = useContext(Context)
 
 const fileChangeHandler =async(e)=>{
@@ -53,7 +53,8 @@ if(error)console.log(error.message)
 throw error.message;  
 }
 
-fetchUserProfiles()
+
+fetchUserProfile()
 
 setWebsite('')
 setUsername('')

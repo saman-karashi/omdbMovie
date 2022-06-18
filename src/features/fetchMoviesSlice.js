@@ -7,9 +7,7 @@ loading:false,
 error:''
 }
 
-
-
-export const fetchMoviesHandler = createAsyncThunk(
+export const fetchMovies = createAsyncThunk(
 'movies/fetchMovies',
 async(search,{rejectWithValue})=>{
 try {
@@ -20,12 +18,10 @@ query:search
 }
 
 const {data} = await axios('https://api.themoviedb.org/3/search/movie',{params})
-return data
-    
+return data;
 } catch (error) {
 return rejectWithValue('Opps there seems something went wrong.')
 }
-
 }
 )
 
@@ -33,33 +29,24 @@ return rejectWithValue('Opps there seems something went wrong.')
 const fetchMoviesSlice = createSlice({
 name:'movies',
 initialState,
-reducers:{
-    resetStore:(state)=>{
-    state.error='';
-    state.loading=false;
-    state.movies=null;
-    }
-},
+reducers:{},
 extraReducers:{
-    [fetchMoviesHandler.pending]:(state)=>{
-    state.loading = true;
-    state.movies=null;
-    state.error=''
-    },
-    [fetchMoviesHandler.fulfilled]:(state,{payload})=>{
-    state.loading = false;
-    state.error=''
-    state.movies = payload.results;
-    },
-    [fetchMoviesHandler.rejected]:(state,{payload})=>{
-    state.loading = false;
-    state.error=payload
-    state.movies =null;
-    }
+[fetchMovies.pending]:(state)=>{
+state.loading = true;
+state.movies=null;
+state.error=''
+},
+[fetchMovies.fulfilled]:(state,{payload})=>{
+state.loading = false;
+state.error=''
+state.movies = payload.results;
+},
+[fetchMovies.rejected]:(state,{payload})=>{
+state.loading = false;
+state.error=payload
+state.movies =null;
+}
 }
 })
-
-
-export const {resetStore} = fetchMoviesSlice.actions;
 
 export const fetchMoviesReducer = fetchMoviesSlice.reducer;

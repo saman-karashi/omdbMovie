@@ -1,68 +1,63 @@
-import React,{useState,useContext} from 'react';
-import {Link} from 'react-router-dom';
+import {useContext} from 'react'
+import { Link } from 'react-router-dom';
 import { Context } from '../../context/authContext';
 
-const MobileNav = ({user,username,avatar_url}) => {
-const [isOpen,setIsOpen]=useState(false);
+const MobileNav = ({isOpen,user,setIsOpen}) => {
 const {
+avatar_url,
+username,
 logOut
-}=useContext(Context)
+}=useContext(Context);
+
+const logoutHandler = ()=>{
+logOut()
+}
+
+const closeSidebarMenuHandler =()=>{
+setIsOpen(false)
+}
 
 return (
-<>
-  {/* Hamburger */}
-  <div onClick={()=> setIsOpen(prev => !prev)} className={`hamburger-menu ${isOpen ? 'active' : ''}`}>
-      <div className='bar'></div>
-      <div className='bar'></div>
-      <div className='bar'></div>
-  </div>
-
-  <div className={`fixed w-80 z-10 h-screen bg-neutral-900 right-0 top-16 transition-all duration-500 ${isOpen ? 'translate-x-0' : 'translate-x-full'} lg:hidden`}>
-      {user &&
-      <div className='my-5 flex justify-center flex-col items-center'>
-          <div className='my-5'>
-              <img className={`w-16 h-16 rounded-full ${avatar_url ? "opacity-1" : "opacity-0"}`} src={avatar_url && `https://sbybrlsjodbbxrkdbsru.supabase.co/storage/v1/object/public/${avatar_url}`} /> 
-          </div> 
-          <h1 className='text-white mx-5'>{`Welcome ${username}`}</h1>
-      </div>
-      }
-      
-      <div className='text-center'>
-      <nav>
-          <ul className='text-white text-center'>
-              {user ?
-              <>
-              <li className='mt-4 duration-200 ease-ease-in-out hover:text-darkSky'>
-                  <Link to='/'>Home</Link>
-              </li>
-              <li className='mt-4 duration-200 ease-ease-in-out hover:text-darkSky'>
-                  <Link to='/watchlists'>Watchlists</Link>
-              </li>
-              <li className='mt-4 duration-200 ease-ease-in-out hover:text-darkSky'>
-                  <Link to='/profile'>Profile</Link>
-              </li>
-              </>  
-              :
-              <>
-                <li className='mt-4 duration-200 ease-ease-in-out hover:text-darkSky'>
-                  <Link to='/'>Home</Link>
-                </li>
-                <li className='mt-4 duration-200 ease-ease-in-out hover:text-darkSky'>
-                  <Link to='/sign-up'>Sign up</Link>
-                </li>
-              </>
-          }
-          </ul>
-        </nav>
-        {user &&
-        <div className='mt-5 text-center'>
-          <button onClick={logOut} className='px-5 py-2 rounded-full text-white bg-darkRed font-bold'>Log out</button>
-          </div>
-        }
-      </div>
+<nav onMouseLeave={closeSidebarMenuHandler} className={`text-center fixed right-0 top-16 w-72 bg-black rounded-l-md h-96 z-10 transition-all duration-200 ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+   {user &&
+   <div className='flex flex-col items-center my-5'>
+        <h1 className='text-white font-bold whitespace-nowrap overflow-hidden text-ellipsis'>{`Welcome ${username}`}</h1>
+        {avatar_url &&
+        <div className='mt-4'>
+            <img src={`https://sbybrlsjodbbxrkdbsru.supabase.co/storage/v1/object/public/${avatar_url}`} alt={username} className='rounded-full w-16 h-16'/>
+        </div>
+        } 
     </div>
-</>
-)
+   } 
+    <ul>
+        {!user ?
+        <>
+        <li className='text-white my-2 transition-all duration-200 hover:text-darkSky'>
+            <Link to={'/'}>Home</Link>
+        </li>
+        <li className='text-white my-2 transition-all duration-200 hover:text-darkSky'>
+            <Link to={'/sign-in'}>Sign in</Link>
+        </li>
+        </>
+        :
+        <>
+        <li className='text-white my-2 transition-all duration-200 hover:text-darkSky'>
+            <Link to={'/'}>Home</Link>
+        </li>
+        <li className='text-white my-2 transition-all duration-200 hover:text-darkSky'>
+            <Link to={'/watchlists'}>Watchlists</Link>
+        </li>
+        <li className='text-white my-2 transition-all duration-200 hover:text-darkSky'>
+            <Link to={'/profile'}>Profile</Link>
+        </li>
+        </>
+    }
+    </ul>
+    {user &&
+    <button onClick={logoutHandler} className='mt-2 text-white font-bold rounded-full px-5 py-2 bg-red-600 transition-all duration-200 hover:opacity-90'>Log out</button>
+    }
+</nav>
+  )
 }
 
 export default MobileNav
