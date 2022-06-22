@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/omdbMovie/static/css/main.d058fcb7.css",
-    "main.js": "/omdbMovie/static/js/main.90f23dcc.js",
+    "main.css": "/omdbMovie/static/css/main.95a71549.css",
+    "main.js": "/omdbMovie/static/js/main.dce4c97e.js",
     "index.html": "/omdbMovie/index.html",
-    "main.d058fcb7.css.map": "/omdbMovie/static/css/main.d058fcb7.css.map",
-    "main.90f23dcc.js.map": "/omdbMovie/static/js/main.90f23dcc.js.map"
+    "main.95a71549.css.map": "/omdbMovie/static/css/main.95a71549.css.map",
+    "main.dce4c97e.js.map": "/omdbMovie/static/js/main.dce4c97e.js.map"
   },
   "entrypoints": [
-    "static/css/main.d058fcb7.css",
-    "static/js/main.90f23dcc.js"
+    "static/css/main.95a71549.css",
+    "static/js/main.dce4c97e.js"
   ]
 }
