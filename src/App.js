@@ -4,6 +4,7 @@ import Auth from './components/auth/Auth';
 import Profile from './components/profile/Profile';
 import Navbar from './components/navbar/Navbar';
 import Watchlists from './components/watchlists/Watchlists';
+import Watchlist from './components/watchlist/Watchlist';
 
 const App = () => {
 return (
@@ -13,7 +14,8 @@ return (
     <Route index element={<Home />} />
     <Route path='/sign-in' element={<Auth />} />
     <Route path='/profile' element={<Profile />} />
-    <Route path='/watchlists' element={<Watchlists />} /> 
+    <Route path='/watchlists' element={<Watchlists />} />
+    <Route path='/watchlists/:id' element={<Watchlist />} /> 
   </Routes>
 </BrowserRouter>
 )

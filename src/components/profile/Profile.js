@@ -61,11 +61,12 @@ setUsername('')
 setAvatarUrl('')
 }
 
+let formIsValid = username && website && avatar_url ? true : false; 
 
 return (
 <Layout>
- <section className='w-96 rounded bg-white mx-auto'>
-  <form onSubmit={formSubmitHandler}>
+ <section className='w-auto mx-auto sm:w-96'>
+  <form onSubmit={formSubmitHandler} className="bg-white rounded">
    <div className='flex flex-col items-center'>
      
       {isUploading ?
@@ -85,7 +86,7 @@ return (
         <input value={website} onChange={(e)=> setWebsite(e.target.value)} type='url' placeholder='Enter your website' className='w-full border border-lightGray p-1 focus:outline-none placeholder:text-sm' />
     </div>
     <div className='text-center p-5'>
-        <button type='submit' className='bg-lightGreen text-black rounded px-5 py-2 font-bold duration-200 hover:opacity-80'>Update</button>
+        <button disabled={!formIsValid} type='submit' className='bg-lightGreen text-black rounded px-5 py-2 font-bold duration-200 disabled:bg-slate-300 hover:opacity-80'>Update</button>
     </div>
   </form>
  </section>

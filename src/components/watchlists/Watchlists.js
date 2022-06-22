@@ -1,9 +1,10 @@
 import {useEffect,useState} from 'react'
-import { Minus } from '../../icons';
+import { Minus,PlayBtn} from '../../icons';
 import Layout from '../layout/Layout';
 import Movie from '../movie/Movie';
 import {supabase} from '../../supabaseClient';
 import { BounceLoader } from 'react-spinners';
+import { Link } from 'react-router-dom';
 
 const Watchlists = () => {
 const [watchlists,setWatchlists]=useState(null);
@@ -25,9 +26,7 @@ throw new Error('Opps,it seems something went wrong.')
 }
 
 useEffect(()=>{
-let mounted=true;
-if(mounted)fetchWatchlists()
-return ()=> mounted=false;
+fetchWatchlists()
 },[])
 
 const removeFromWatchlists = async(id)=>{
@@ -57,7 +56,7 @@ return(
 
 return (
 <Layout>
-    <div className='grid gap-5 mt-10 p-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
+    <div className='grid gap-5 w-72 sm:w-80 mt-10 grid-cols-1 mx-auto md:w-auto md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
     {watchlists &&
     watchlists.map((watchlist)=>{
     return(
@@ -66,7 +65,10 @@ return (
             <Minus />
         watchlist
       </button>
-
+      <Link to={`/watchlists/${watchlist.movie_id}`} className="flex items-center justify-center text-white w-full p-2 font-bold hover:bg-black-800" >
+          <span className='text-darkGray'><PlayBtn /></span>
+            Trailer
+      </Link>
     </Movie>
     )
     })

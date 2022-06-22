@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 const Movies = () => {
 const {movies} =useSelector(store => store.fetchMovies);
 
-const addToWatchlists = async({poster_path,vote_average,title})=>{
+const addToWatchlists = async({poster_path,vote_average,title,id})=>{
 try {
 const user = supabase.auth.user()
 
@@ -16,9 +16,11 @@ const {error}=await supabase.from('watchlists').insert([
 poster_path,
 vote_average,
 title,
+movie_id:id,
 user_id:user?.id
 }
-],{returning:"minimal"})
+],
+{returning:"minimal"})
 
 if(error){
 toast.warning('You\'ve not logged in yet.')
@@ -32,7 +34,7 @@ throw error.message;
 
 
 return (
-<div className='grid w-96 mx-auto gap-5 mt-10 p-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:w-auto'>
+<div className='grid mx-auto gap-5 mt-10 py-4 grid-cols-1 w-72 sm:w-80 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:w-auto'>
 {
   movies && movies.map((movie)=>{
   return (

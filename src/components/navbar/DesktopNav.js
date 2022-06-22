@@ -43,10 +43,10 @@ return (
       </ul>
       {user &&
       <div className='flex items-center'>
-        <h1 className='text-white font-bold whitespace-nowrap overflow-hidden text-ellipsis'>{`Welcome ${username}`}</h1>
+      {username &&  <h1 className='text-white font-bold whitespace-nowrap overflow-hidden text-ellipsis'>{`Welcome ${username}`}</h1>} 
   
         <div className="mx-2">
-          <img src={`https://sbybrlsjodbbxrkdbsru.supabase.co/storage/v1/object/public/${avatar_url}`} alt={username} className='mx-2 rounded-full w-16 h-16'/> 
+         {avatar_url &&  <img src={`https://sbybrlsjodbbxrkdbsru.supabase.co/storage/v1/object/public/${avatar_url}`} alt={username} className='mx-2 rounded-full w-16 h-16'/> }
         </div>
         
          <button onClick={logoutHandler} className='text-white font-bold rounded-full px-5 py-2 bg-red-600 transition-all duration-200 hover:opacity-90'>Log out</button>

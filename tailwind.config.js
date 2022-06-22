@@ -21,6 +21,10 @@ module.exports = {
         },
         spacing:{
         '500':'31.25rem'
+        },
+        height:{
+        '800':'50rem',
+        '1000':'62.5rem'
         }
     },
   },

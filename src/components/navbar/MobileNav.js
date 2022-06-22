@@ -9,6 +9,7 @@ username,
 logOut
 }=useContext(Context);
 
+
 const logoutHandler = ()=>{
 logOut()
 }
@@ -21,7 +22,7 @@ return (
 <nav onMouseLeave={closeSidebarMenuHandler} className={`text-center fixed right-0 top-16 w-72 bg-black rounded-l-md h-96 z-10 transition-all duration-200 ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
    {user &&
    <div className='flex flex-col items-center my-5'>
-        <h1 className='text-white font-bold whitespace-nowrap overflow-hidden text-ellipsis'>{`Welcome ${username}`}</h1>
+        {username && <h1 className='text-white font-bold whitespace-nowrap overflow-hidden text-ellipsis'>{`Welcome ${username}`}</h1>}
         {avatar_url &&
         <div className='mt-4'>
             <img src={`https://sbybrlsjodbbxrkdbsru.supabase.co/storage/v1/object/public/${avatar_url}`} alt={username} className='rounded-full w-16 h-16'/>

@@ -10,7 +10,9 @@ fetchUserProfile:()=>{},
 avatar_url:'',
 username:'',
 signinErr:'',
-signupErr:''
+signupErr:'',
+setSigninErr:()=>{},
+setSignupErr:()=>{}
 })
 
 const AuthContext =({children})=>{
@@ -28,8 +30,7 @@ password
 
 if(error)setSignupErr('You\'ve already registered.')
 if(session){
-toast.success('You\'ve successfully signed up.')   
-setSignupErr('')   
+toast.success('You\'ve successfully signed up.')     
 }
 }catch (error) {
 throw error.message;
@@ -40,11 +41,10 @@ throw error.message;
 const signIn =async({email,password})=>{
 try {
 const {error,session} = await supabase.auth.signIn({email,password})  
-if(error)setSigninErr(error.message);
+if(error)setSigninErr('You\'ve not signed up yet.');
 if(session){
 toast.success('You\'ve successfully logged in.') 
 setSigninErr('')
-console.log(session);
 } 
 } catch (error) {
 throw error.message;  
@@ -87,6 +87,8 @@ const values={
 signIn,
 signUp,
 logOut,
+setSigninErr,
+setSignupErr,
 fetchUserProfile,
 username,
 avatar_url,
