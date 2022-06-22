@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/omdbMovie/static/css/main.d058fcb7.css",
+    "main.js": "/omdbMovie/static/js/main.90f23dcc.js",
+    "index.html": "/omdbMovie/index.html",
+    "main.d058fcb7.css.map": "/omdbMovie/static/css/main.d058fcb7.css.map",
+    "main.90f23dcc.js.map": "/omdbMovie/static/js/main.90f23dcc.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d058fcb7.css",
+    "static/js/main.90f23dcc.js"
+  ]
+}
