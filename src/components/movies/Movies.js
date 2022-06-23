@@ -9,8 +9,11 @@ const {movies} =useSelector(store => store.fetchMovies);
 
 const addToWatchlists = async({poster_path,vote_average,title,id})=>{
 try {
-const user = supabase.auth.user()
+const user = supabase.auth.user();
 
+const {data}=await supabase.from('watchlists').select('*').eq('title',title);
+
+if(data.length > 0)return;
 const {error}=await supabase.from('watchlists').insert([
 {
 poster_path,
@@ -20,7 +23,9 @@ movie_id:id,
 user_id:user?.id
 }
 ],
-{returning:"minimal"})
+{returning:"minimal"},
+{onConflict:'title'})
+
 
 if(error){
 toast.warning('You\'ve not logged in yet.')

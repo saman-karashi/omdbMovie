@@ -38,7 +38,7 @@ state.error=''
 },
 [fetchMovies.fulfilled]:(state,{payload})=>{
 state.loading = false;
-state.error=''
+state.error=payload?.results?.length === 0 ? '404 Not found' : ''
 state.movies = payload.results;
 },
 [fetchMovies.rejected]:(state,{payload})=>{
